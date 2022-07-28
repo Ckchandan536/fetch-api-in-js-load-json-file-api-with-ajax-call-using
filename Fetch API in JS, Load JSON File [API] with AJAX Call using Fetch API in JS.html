@@ -1,0 +1,38 @@
+<p id="apiindia"></p>
+<script type="text/javascript">
+// The Fetch API.
+
+// the Fetch API provides a fetch() method defined on the window objec, 
+// which you can use to perform requests.
+
+// this method returns a PROMISE that you can use to retrieve 
+// the response of the request
+
+
+
+// https://api.covid19api.com/summary the api data we got is JSON format ,but it seems like in object form
+
+// we have toconvert this JSON Formate data into JavaScript object.
+fetch('https://api.covid19api.com/summary')
+.then( (apidata) => {
+    // console.log(apidata);
+    // we have to convert this JSON Formate data into JavaScript object. use return keyword
+    return apidata.json();
+} )
+
+.then((actualdata) => {
+    // console.log(actualdata);
+    // console.log(actualdata.Countries[77]);
+    const mydata= actualdata.Countries[77];
+    document.getElementById('apiindia').innerHTML= ` Date ${mydata.Date}, <br> The name of country is 
+    ${mydata.Country}.<br> The Total Confirmed cases here is 
+    ${mydata.TotalConfirmed},<br> the Total Death cases here is 
+    ${mydata.TotalDeaths}<br> and finally te Total Recovered cases here is 
+    ${mydata.TotalRecovered}`; 
+})
+
+.catch( (error) => {
+    console.log(`The Error: ${error}`);
+});
+
+</script>
